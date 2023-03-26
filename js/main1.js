@@ -1,53 +1,45 @@
 $(document).ready(function(){
-	$("body").delegate(".bussearch","click",function(){
-           $("#search").hide();
-           $("#result").show();
-           var from=$("#from").val();
-           var to=$("#to").val();
-           var date=$("#date").val();
-         $.ajax({
-         url : "../action.php",
+  function ticket(){
+     $.ajax({
+         url : "action.php",
          method :"POST",
-         data:{search:1,from:from,to:to,date:date},
+         data:{ticket:1},
          success : function(data){
+         
            $("#results").html(data);
           
          }
       })
-    })
- 
-    $("body").delegate(".book","click",function(){
-           $("#search").hide();
-           $("#result").hide();
-           $("#booking").show();
-            var bid=$(this).attr('bid');
-            var jid=$(this).attr('jid');
-            var seat=$(this).attr('seat');
-         $.ajax({
-         url : "../action.php",
+  }
+  ticket();
+    $("body").delegate(".booking","click",function(){
+     $("#booked").show(); 
+     $("#booking").hide();
+     var bid=$("#bid").val();
+       $.ajax({
+         url : "action.php",
          method :"POST",
-         data:{book:1,bid:bid,jid:jid,seat:seat},
+         data:{bkd:1,bid:bid},
          success : function(data){
-           $("#bookingres").html(data);
+           $("#bresult").html(data);
          }
       })
+      
     })
-   $("body").delegate(".booking","click",function(){
-           $("#search").hide();
-           $("#result").hide();
-           $("#booking").show();
-            var name=$("#name").val();
-            var no_p=$("#no").val();
-            var bid=$(this).attr('bid');
-            var jid=$(this).attr('jid');
-            var seat=$(this).attr('seat');
-         $.ajax({
-         url : "../action.php",
+    $("body").delegate(".ticketdate","click",function(){
+     $("#bookeddate").show(); 
+     $("#ticketdate").hide();
+     var bid=$("#bid").val();
+     var date=$("#pdate").val();
+       $.ajax({
+         url : "action.php",
          method :"POST",
-         data:{booking:1,bid:bid,jid:jid,seat:seat,name:name,no_p:no_p},
+         data:{tbkd:1,bid:bid,date:date},
          success : function(data){
-           alert(data)
+         
+           $("#bdresult").html(data);
          }
       })
+      
     })
 });
